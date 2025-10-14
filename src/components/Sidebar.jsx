@@ -1,6 +1,6 @@
-import { Home, FileText, Settings } from "lucide-react";
+import { Home, FileText, Settings, UserCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { Profiler } from "react";
 
 const Sidebar = () => {
   return (
@@ -26,6 +26,14 @@ const Sidebar = () => {
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >
           <Settings size={18} /> Settings
+        </Link>
+
+
+         <Link
+          to="/ProfilePage"
+          className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
+        >
+          <UserCircle2 size={18} /> Profile
         </Link>
       </nav>
     </div>

@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import { Import } from "lucide-react";
+import ProfilePage from "./pages/ProfilePage";
 Import
 
 const PrivateRoute = ({ children }) => {
@@ -35,11 +36,20 @@ function App() {
         }
       />
 
-     <Route
+      <Route
         path="/AnalyticsDashboard"
         element={
           <PrivateRoute>
             <AnalyticsDashboard />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/ProfilePage"
+        element={
+          <PrivateRoute>
+            <ProfilePage />
           </PrivateRoute>
         }
       />

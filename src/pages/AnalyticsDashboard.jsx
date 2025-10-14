@@ -169,7 +169,7 @@ export default function AnalyticsDashboard() {
         </div>
 
 
-        <div className="flex flex-col lg:flex-row gap-6">
+        <div className="flex flex-col lg:flex-row gap-6 h-[350px]">
           {/* Line Chart */}
           <div className="bg-white shadow rounded-xl p-6 w-full lg:w-[700px]">
             <h3 className="text-lg font-semibold mb-4">
