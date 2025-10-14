@@ -2,6 +2,9 @@ import React from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import AnalyticsDashboard from "./pages/AnalyticsDashboard";
+import { Import } from "lucide-react";
+Import
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("loggedIn") === "true";
@@ -28,6 +31,15 @@ function App() {
         element={
           <PrivateRoute>
             <Dashboard />
+          </PrivateRoute>
+        }
+      />
+
+     <Route
+        path="/AnalyticsDashboard"
+        element={
+          <PrivateRoute>
+            <AnalyticsDashboard />
           </PrivateRoute>
         }
       />

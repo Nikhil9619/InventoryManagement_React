@@ -10,13 +10,13 @@ const Sidebar = () => {
       </div>
       <nav className="flex-1 p-4 space-y-3">
         <Link
-          to="/"
+          to="/AnalyticsDashboard"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >
-          <Home size={18} /> Dashboard
+          <Home size={18} />  Dashboard 
         </Link>
         <Link
-          to="/invoices"
+          to="/"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >
           <FileText size={18} /> Invoices
