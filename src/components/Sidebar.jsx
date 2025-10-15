@@ -16,7 +16,7 @@ const Sidebar = () => {
           <Home size={18} />  Dashboard
         </Link>
         <Link
-          to="/"
+          to="/Dashboard"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >
           <FileText size={18} /> Invoices
