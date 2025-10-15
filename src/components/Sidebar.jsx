@@ -1,4 +1,4 @@
-import { Home, FileText, Settings, UserCircle2 } from "lucide-react";
+import { Home, FileText, Settings, UserCircle2, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import React, { Profiler } from "react";
 
@@ -13,7 +13,7 @@ const Sidebar = () => {
           to="/AnalyticsDashboard"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >
-          <Home size={18} />  Dashboard 
+          <Home size={18} />  Dashboard
         </Link>
         <Link
           to="/"
@@ -21,6 +21,16 @@ const Sidebar = () => {
         >
           <FileText size={18} /> Invoices
         </Link>
+
+        <Link
+          to="/CustomerPage"
+          className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
+        >
+          <User size={18} /> Customers
+        </Link>
+
+
+
         <Link
           to="/settings"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
@@ -29,7 +39,7 @@ const Sidebar = () => {
         </Link>
 
 
-         <Link
+        <Link
           to="/ProfilePage"
           className="flex items-center gap-3 p-2 text-gray-700 rounded-md hover:bg-indigo-50 hover:text-indigo-600"
         >

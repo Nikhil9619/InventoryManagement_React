@@ -5,7 +5,8 @@ import Login from "./pages/Login";
 import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 import { Import } from "lucide-react";
 import ProfilePage from "./pages/ProfilePage";
-Import
+import CustomerPage from "./pages/CustomerPage";
+
 
 const PrivateRoute = ({ children }) => {
   const isLoggedIn = localStorage.getItem("loggedIn") === "true";
@@ -50,6 +51,15 @@ function App() {
         element={
           <PrivateRoute>
             <ProfilePage />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/CustomerPage"
+        element={
+          <PrivateRoute>
+            <CustomerPage />
           </PrivateRoute>
         }
       />
