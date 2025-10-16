@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { getProfile, updateProfile } from "../services/api/profileService";
 import { Edit2, Save, Building2, Mail, Phone } from "lucide-react";
 import Layout from "../components/Layout";
 
@@ -6,7 +7,6 @@ export default function ProfilePage() {
     const [profile, setProfile] = useState({
         business_name: "",
         legal_name: "",
-        
         gstin: "",
         pan_no: "",
         cin: "",
@@ -25,22 +25,36 @@ export default function ProfilePage() {
         signature_url: "",
     });
 
-    const [isEditing, setIsEditing] = useState(true); // initially form is shown
+    const [isEditing, setIsEditing] = useState(false); // initially form is shown
 
-    // === Load from localStorage on mount ===
-    useEffect(() => {
-        const saved = JSON.parse(localStorage.getItem("business_profile"));
-        if (saved) {
-            setProfile(saved);
-            setIsEditing(false); // if data exists, show view mode
+    const fetchProfile = async () => {
+        try {
+            const data = await getProfile();
+            if (data) {
+                setProfile(data);
+                setIsEditing(false);
+            }
+        } catch (error) {
+            // Optionally handle error (e.g., show notification)
+            setIsEditing(true);
         }
+    };
+
+    // === Fetch profile from API on mount ===
+    useEffect(() => {
+        fetchProfile();
     }, []);
 
-    // === Save to localStorage ===
-    const handleSave = (e) => {
+
+    // === Save to API ===
+    const handleSave = async (e) => {
         e.preventDefault();
-        localStorage.setItem("business_profile", JSON.stringify(profile));
-        setIsEditing(false);
+        try {
+            await updateProfile(profile);
+            setIsEditing(false);
+        } catch (error) {
+            // Optionally handle error (e.g., show notification)
+        }
     };
 
     // === Handle change ===
@@ -80,7 +94,7 @@ export default function ProfilePage() {
                     <div className="bg-white shadow rounded-xl p-6">
                         <div className="flex items-center gap-4 mb-6">
                             <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-300 bg-gray-100">
-                                {profile.logo_url ? (
+                                {profile.logo_url  ? (
                                     <img
                                         src={profile.logo_url}
                                         alt="Logo"

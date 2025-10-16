@@ -8,6 +8,11 @@ import {
   PlusCircle,
   X,
 } from "lucide-react";
+import {
+  getAllCustomers,
+  addCustomer,
+  updateCustomer,
+} from "../services/api/customerService";
 
 const CustomerPage = () => {
   const [customers, setCustomers] = useState([]);
@@ -26,16 +31,19 @@ const CustomerPage = () => {
     created_at: new Date().toISOString(),
   });
 
-  // ✅ Load data from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("customers");
-    if (saved) setCustomers(JSON.parse(saved));
-  }, []);
+  const fetchCustomers = async () => {
+    try {
+      const data = await getAllCustomers();
+      setCustomers(data);
+    } catch (error) {
+      // Optionally handle error (e.g., show notification)
+    }
+  };
 
-  // ✅ Save to localStorage whenever customers update
+  // === Load customers from API ===
   useEffect(() => {
-    localStorage.setItem("customers", JSON.stringify(customers));
-  }, [customers]);
+    fetchCustomers();
+  }, []);
 
   // === KPI Calculations ===
   const totalCustomers = customers.length;
@@ -49,29 +57,44 @@ const CustomerPage = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // === Handle Save ===
-  const handleSave = (e) => {
+  // === Handle Save (Add Customer) ===
+  const handleSave = async (e) => {
     e.preventDefault();
-    const newCustomer = {
-      ...formData,
-      created_at: new Date().toISOString(),
-    };
-    setCustomers((prev) => [...prev, newCustomer]);
-    setShowModal(false);
-    setFormData({
-      company_name: "",
-      contact_person: "",
-      email: "",
-      phone: "",
-      billing_address: "",
-      shipping_address: "",
-      gstin: "",
-      pan_no: "",
-      state: "",
-      pincode: "",
-      created_at: new Date().toISOString(),
-    });
+    try {
+      const newCustomer = {
+        ...formData,
+        created_at: new Date().toISOString(),
+      };
+      const added = await addCustomer(newCustomer);
+      setCustomers((prev) => [...prev, added]);
+      setShowModal(false);
+      setFormData({
+        company_name: "",
+        contact_person: "",
+        email: "",
+        phone: "",
+        billing_address: "",
+        shipping_address: "",
+        gstin: "",
+        pan_no: "",
+        state: "",
+        pincode: "",
+        created_at: new Date().toISOString(),
+      });
+    } catch (error) {
+      // Optionally handle error (e.g., show notification)
+    }
   };
+
+  // === Update Customer (example usage, not wired to UI) ===
+  // const handleUpdateCustomer = async (customerId, updatedData) => {
+  //   try {
+  //     const updated = await updateCustomer(customerId, updatedData);
+  //     setCustomers((prev) => prev.map(c => c.id === customerId ? updated : c));
+  //   } catch (error) {
+  //     // Optionally handle error
+  //   }
+  // };
 
   return (
     <Layout>
@@ -134,16 +157,16 @@ const CustomerPage = () => {
                   <td className="border px-3 py-2 font-semibold">
                     {cust.company_name || "—"}
                   </td>
-                  <td className="border px-3 py-2 flex items-center gap-2">
-                    <User size={14} className="text-gray-500" />
+                  <td className="border px-3 py-2  items-center gap-2">
+                    {/* <User size={14} className="text-gray-500" /> */}
                     {cust.contact_person || "—"}
                   </td>
-                  <td className="border px-3 py-2 flex items-center gap-2">
-                    <Mail size={14} className="text-gray-500" />
+                  <td className="border px-3 py-2 items-center gap-2">
+                    {/* <Mail size={14} className="text-gray-500" /> */}
                     {cust.email || "—"}
                   </td>
-                  <td className="border px-3 py-2 flex items-center gap-2">
-                    <Phone size={14} className="text-gray-500" />
+                  <td className="border px-3 py-2 items-center gap-2">
+                    {/* <Phone size={14} className="text-gray-500" /> */}
                     {cust.phone || "—"}
                   </td>
                   <td className="border px-3 py-2">{cust.gstin || "—"}</td>
