@@ -75,8 +75,6 @@ const CustomerPage = () => {
 
             // ✅ Update customers list in UI
             setCustomers((prev) => [...prev, added]);
-
-            // ✅ Reset form after saving
             setFormData({
                 company_name: "",
                 contact_person: "",
@@ -98,8 +96,6 @@ const CustomerPage = () => {
             alert("Failed to save customer. Check console for details.");
         }
     };
-
-
 
     return (
         <Layout>
@@ -164,7 +160,7 @@ const CustomerPage = () => {
                             <tbody>
                                 {customers.map((cust, index) => (
                                     <tr
-                                        key={cust.company_name || index}
+                                        key={index}
                                         className="hover:bg-gray-50 transition-colors"
                                     >
                                         {/* <td className="border px-3 py-2">{index + 1}</td> */}

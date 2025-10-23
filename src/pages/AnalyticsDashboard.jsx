@@ -122,7 +122,7 @@ export default function AnalyticsDashboard() {
   return (
     <Layout>
 
-      <div className="p-8 bg-gray-50 min-h-screen">
+      <div className=" bg-gray-50 min-h-screen">
         {/* === Header + Filter === */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
           {/* <h2 className="text-3xl font-bold">Dashboard</h2> */}
@@ -141,8 +141,8 @@ export default function AnalyticsDashboard() {
         </div>
 
         {/* === KPI CARDS === */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-          <div className="bg-white shadow rounded-xl p-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10   ">
+          <div className="bg-white shadow rounded-xl p-6  ">
             <h3 className="text-gray-500">Total Sales</h3>
             <p className="text-3xl font-semibold text-indigo-600">
               ₹{stats.totalSales.toLocaleString("en-IN")}
@@ -211,7 +211,7 @@ export default function AnalyticsDashboard() {
 
 
         {/* === BAR CHART: Monthly Comparison === */}
-        <div className="bg-white shadow rounded-xl p-6 mb-8">
+        <div className="bg-white shadow rounded-xl p-6 mt-8">
           <h3 className="text-lg font-semibold mb-4">Monthly Comparison</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={monthlyData}>

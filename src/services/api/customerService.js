@@ -3,7 +3,7 @@
 
 import axios from 'axios';
 
-const API_BASE_URL = 'http://192.168.0.102:3000/api/'; // Change this to your actual API endpoint
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Get all customers
 export const getAllCustomers = async () => {
