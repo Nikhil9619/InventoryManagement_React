@@ -68,9 +68,7 @@ const CustomerPage = () => {
             const added = await addCustomer(newCustomer);
             setCustomers((prev) => [...prev, added]);
             setShowModal(false);
-            const [customers, setCustomers] = useState([]);
-            const [showModal, setShowModal] = useState(false);
-            const [formData, setFormData] = useState({
+            setFormData({
                 company_name: "",
                 contact_person: "",
                 email: "",
@@ -87,78 +85,6 @@ const CustomerPage = () => {
             // Optionally handle error (e.g., show notification)
         }
     };
-
-    // === Update Customer (example usage, not wired to UI) ===
-    // const handleUpdateCustomer = async (customerId, updatedData) => {
-    //   try {
-    //     const updated = await updateCustomer(customerId, updatedData);
-    //     setCustomers((prev) => prev.map(c => c.id === customerId ? updated : c));
-    //   } catch (error) {
-    //     // Optionally handle error
-    //   }
-    // };
-
-    //   return (
-    // <Layout>
-    //   <div className="flex justify-between items-center mb-6">
-    //     <h2 className="text-2xl font-bold">Customers Overview</h2>
-    //     <button
-    //       onClick={() => setShowModal(true)}
-    //       className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700"
-    //     >
-    //       <PlusCircle size={18} /> Add Customer
-    //     </button>
-    //   </div>
-
-
-
-
-    //     {customers.length === 0 ? (
-    //       <p className="text-gray-500">No customers found.</p>
-    //     ) : (
-    //       <table className="min-w-full text-sm border border-gray-200">
-    //         <thead className="bg-gray-100">
-    //           <tr>
-    //             <th className="border px-3 py-2 text-left">#</th>
-    //             <th className="border px-3 py-2 text-left">Company</th>
-    //             <th className="border px-3 py-2 text-left">Contact Person</th>
-    //             <th className="border px-3 py-2 text-left">Email</th>
-    //             <th className="border px-3 py-2 text-left">Phone</th>
-    //             <th className="border px-3 py-2 text-left">GSTIN</th>
-    //             <th className="border px-3 py-2 text-left">State</th>
-    //             <th className="border px-3 py-2 text-left">Created At</th>
-    //           </tr>
-    //         </thead>
-    //         <tbody>
-    //           {customers.map((cust, index) => (
-    //             <tr key={index} className="hover:bg-gray-50">
-    //               <td className="border px-3 py-2">{index + 1}</td>
-    //               <td className="border px-3 py-2 font-semibold">
-    //                 {cust.company_name || "—"}
-    //               </td>
-    //               <td className="border px-3 py-2  items-center gap-2">
-    //                 {/* <User size={14} className="text-gray-500" /> */}
-    //                 {cust.contact_person || "—"}
-    //               </td>
-    //               <td className="border px-3 py-2 items-center gap-2">
-    //                 {/* <Mail size={14} className="text-gray-500" /> */}
-    //                 {cust.email || "—"}
-    //               </td>
-    //               <td className="border px-3 py-2 items-center gap-2">
-    //                 {/* <Phone size={14} className="text-gray-500" /> */}
-    //                 {cust.phone || "—"}
-    //               </td>
-    //               <td className="border px-3 py-2">{cust.gstin || "—"}</td>
-    //               <td className="border px-3 py-2">{cust.state || "—"}</td>
-    //               <td className="border px-3 py-2 text-gray-500">
-    //                 {new Date(cust.created_at).toLocaleDateString()}
-    //               </td>
-    //             </tr>
-    //           ))}
-    //         </tbody>
-    //       </table>
-    //     )}
-    //   </div>
 
     return (
         <Layout>
@@ -223,7 +149,7 @@ const CustomerPage = () => {
                             <tbody>
                                 {customers.map((cust, index) => (
                                     <tr
-                                        key={cust.company_name || index}
+                                        key={index}
                                         className="hover:bg-gray-50 transition-colors"
                                     >
                                         {/* <td className="border px-3 py-2">{index + 1}</td> */}
