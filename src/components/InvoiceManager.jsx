@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from "react";
 import { getAllCustomers } from "../services/api/customerService";
 
@@ -100,7 +98,7 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
       ...prev,
       products: [
         ...prev.products,
-        { description: "", hsn: "", qty: 1, rate: 0, gst:0, amount: 0 },
+        { description: "", hsn: "", qty: 1, rate: 0, gst: 0, amount: 0 },
       ],
     }));
   };
@@ -149,9 +147,7 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
 
   if (!show) return null;
 
-  const selectedCustomer = customers.find(
-    (c) => c.id === formData.customer_id
-  );
+  const selectedCustomer = customers.find((c) => c.id === formData.customer_id);
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto p-4">
@@ -171,7 +167,9 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
         {/* === Customer Dropdown === */}
         <div className="grid md:grid-cols-3 gap-4 mb-6">
           <div>
-            <label className="text-sm font-medium text-gray-600">Customer</label>
+            <label className="text-sm font-medium text-gray-600">
+              Customer
+            </label>
             <select
               name="customer_id"
               value={formData.customer_id}
@@ -201,7 +199,9 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-600">Due Date</label>
+            <label className="text-sm font-medium text-gray-600">
+              Due Date
+            </label>
             <input
               type="date"
               name="due_date"
@@ -260,75 +260,80 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
 
         {/* === Product Table === */}
         <h3 className="text-lg font-semibold mb-2">Products</h3>
+        {/* === Product Table === */}
+        <h3 className="text-lg font-semibold mb-2">Products</h3>
         <div className="overflow-x-auto mb-6">
-          <table className="w-full text-sm border border-gray-300">
-            <thead className="bg-gray-100">
-              <tr>
-                <th className="border px-2 py-1">#</th>
-                <th className="border px-2 py-1 text-left">Description</th>
-                <th className="border px-2 py-1 text-left">HSN</th>
-                <th className="border px-2 py-1 text-left">Qty</th>
-                <th className="border px-2 py-1 text-left">Rate</th>
-                <th className="border px-2 py-1 text-left">GST</th>
-                <th className="border px-2 py-1 text-right">Amount</th>
-                <th className="border px-2 py-1"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {formData.products.map((item, i) => (
-                <tr key={i}>
-                  <td className="border px-2 py-1">{i + 1}</td>
-                  <td className="border px-2 py-1">
-                    <input
-                      name="description"
-                      value={item.description}
-                      onChange={(e) => handleProductChange(i, e)}
-                      className="w-full border p-1 rounded"
-                    />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input
-                      name="hsn"
-                      value={item.hsn}
-                      onChange={(e) => handleProductChange(i, e)}
-                      className="w-full border p-1 rounded"
-                    />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input
-                      name="qty"
-                      type="number"
-                      value={item.qty}
-                      onChange={(e) => handleProductChange(i, e)}
-                      className="w-full border p-1 rounded"
-                    />
-                  </td>
-                  <td className="border px-2 py-1">
-                    <input
-                      name="rate"
-                      type="number"
-                      value={item.rate}
-                      onChange={(e) => handleProductChange(i, e)}
-                      className="w-full border p-1 rounded"
-                    />
-                  </td>
-                  <td className="border px-2 py-1 text-right">
-                    ₹{Number(item.amount || 0).toFixed(2)}
-                  </td>
-                  <td className="border px-2 py-1 text-center">
-                    {formData.products.length > 1 && (
-                      <button
-                        onClick={() => removeProduct(i)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        ✕
-                      </button>
-                    )}
-                  </td>
+          {/* Make the table body scrollable */}
+          <div className="max-h-64 overflow-y-auto border rounded-lg">
+            <table className="w-full text-sm border-collapse">
+              <thead className="bg-gray-100 sticky top-0 z-10">
+                <tr>
+                  <th className="border px-2 py-1">#</th>
+                  <th className="border px-2 py-1 text-left">Description</th>
+                  <th className="border px-2 py-1 text-left">HSN</th>
+                  <th className="border px-2 py-1 text-left">Qty</th>
+                  <th className="border px-2 py-1 text-left">Rate</th>
+                  <th className="border px-2 py-1 text-left">GST</th>
+                  <th className="border px-2 py-1 text-right">Amount</th>
+                  <th className="border px-2 py-1"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {formData.products.map((item, i) => (
+                  <tr key={i}>
+                    <td className="border px-2 py-1 text-center">{i + 1}</td>
+                    <td className="border px-2 py-1">
+                      <input
+                        name="description"
+                        value={item.description}
+                        onChange={(e) => handleProductChange(i, e)}
+                        className="w-full border p-1 rounded"
+                      />
+                    </td>
+                    <td className="border px-2 py-1">
+                      <input
+                        name="hsn"
+                        value={item.hsn}
+                        onChange={(e) => handleProductChange(i, e)}
+                        className="w-full border p-1 rounded"
+                      />
+                    </td>
+                    <td className="border px-2 py-1">
+                      <input
+                        name="qty"
+                        type="number"
+                        value={item.qty}
+                        onChange={(e) => handleProductChange(i, e)}
+                        className="w-full border p-1 rounded"
+                      />
+                    </td>
+                    <td className="border px-2 py-1">
+                      <input
+                        name="rate"
+                        type="number"
+                        value={item.rate}
+                        onChange={(e) => handleProductChange(i, e)}
+                        className="w-full border p-1 rounded"
+                      />
+                    </td>
+                    <td className="border px-2 py-1 text-right">
+                      ₹{Number(item.amount || 0).toFixed(2)}
+                    </td>
+                    <td className="border px-2 py-1 text-center">
+                      {formData.products.length > 1 && (
+                        <button
+                          onClick={() => removeProduct(i)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          ✕
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         <button
           onClick={addProduct}
@@ -387,4 +392,3 @@ export default function InvoiceModal({ show, onClose, onSave, editData }) {
     </div>
   );
 }
-
